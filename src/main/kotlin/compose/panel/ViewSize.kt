@@ -10,7 +10,6 @@ enum class ViewSize {
 
     companion object {
         var minSize: IntSize = IntSize(400,400)
-            get() = field
 
         fun fromWindowSize(windowSize: IntSize): ViewSize {
             if (windowSize.width > 1792) {
