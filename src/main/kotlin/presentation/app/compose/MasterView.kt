@@ -8,22 +8,23 @@ import presentation.navigation.AppNavigation
 import presentation.navigation.HomeRouter
 import presentation.navigation.ProductRouter
 import presentation.navigation.RecipeRouter
-import presentation.product.ProductScreen
-import presentation.recipe.RecipeScreen
+import presentation.recipe.ProductScreen
+import presentation.product.RecipeScreen
 
 
 @Composable
 fun MasterView() {
     NavHost(
         AppNavigation.getNavController(),
-        startDestination = HomeRouter.routerName()) {
+        startDestination = HomeRouter.routerName()
+    ) {
 
         composable(HomeRouter.routerName()) {
             HomeScreen()
         }
 
         composable(ProductRouter.routerName()) {
-                ProductScreen()
+            ProductScreen()
         }
 
         composable(RecipeRouter.routerName()) {
