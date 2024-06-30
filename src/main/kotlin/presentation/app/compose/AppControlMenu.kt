@@ -1,4 +1,4 @@
-package presentation.home.compose
+package presentation.app.compose
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.runtime.Composable

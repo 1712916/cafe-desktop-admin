@@ -1,4 +1,4 @@
-package presentation.home.compose
+package presentation.app.compose
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Box
@@ -15,6 +15,9 @@ import androidx.compose.ui.Modifier
 import compose.panel.ViewSize
 import compose.panel.ViewSizeBuilderTemplate
 import presentation.navigation.AppNavigation
+import presentation.navigation.HomeRouter
+import presentation.navigation.ProductRouter
+import presentation.navigation.RecipeRouter
 
 
 /*
@@ -41,14 +44,14 @@ abstract class MenuItem : ViewSizeBuilderTemplate {
             //get roles and check item will be shown in the menu
             return listOf(
                 HomeItem(),
-                SettingItem(),
+//                SettingItem(),
                 ProductItem(),
                 RecipeItem(),
-                IngredientItem(),
-                InventoryItem(),
-                OrderItem(),
-                UserManagementItem(),
-                DashboardItem()
+//                IngredientItem(),
+//                InventoryItem(),
+//                OrderItem(),
+//                UserManagementItem(),
+//                DashboardItem()
             )
         }
     }
@@ -71,6 +74,16 @@ class HomeItem : MenuItem() {
     @Composable
     override fun buildLarge() {
         Text("Home")
+    }
+
+    @OptIn(ExperimentalFoundationApi::class)
+    @Composable
+    override fun build(viewSize: ViewSize) {
+        Box(modifier = Modifier.onClick {
+            AppNavigation.navTo(HomeRouter.routerName())
+        }) {
+            super.build(viewSize)
+        }
     }
 }
 
@@ -117,7 +130,7 @@ class ProductItem : MenuItem() {
     @Composable
     override fun build(viewSize: ViewSize) {
         Box(modifier = Modifier.onClick {
-            AppNavigation.navTo("product")
+            AppNavigation.navTo(ProductRouter.routerName())
         }) {
             super.build(viewSize)
         }
@@ -147,7 +160,7 @@ class RecipeItem : MenuItem() {
     @Composable
     override fun build(viewSize: ViewSize) {
         Box(modifier = Modifier.onClick {
-            AppNavigation.navTo("recipe")
+            AppNavigation.navTo(RecipeRouter.routerName())
         }) {
             super.build(viewSize)
         }

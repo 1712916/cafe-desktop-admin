@@ -1,12 +1,13 @@
-package presentation.home.compose
+package presentation.app.compose
 
-import androidx.compose.foundation.layout.Column
 import androidx.compose.runtime.Composable
-import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import compose.panel.control.ControlMenu
+import presentation.home.HomeScreen
 import presentation.navigation.AppNavigation
+import presentation.navigation.HomeRouter
+import presentation.navigation.ProductRouter
+import presentation.navigation.RecipeRouter
 import presentation.product.ProductScreen
 import presentation.recipe.RecipeScreen
 
@@ -15,13 +16,17 @@ import presentation.recipe.RecipeScreen
 fun MasterView() {
     NavHost(
         AppNavigation.getNavController(),
-        startDestination = "product") {
+        startDestination = HomeRouter.routerName()) {
 
-        composable("product") {
+        composable(HomeRouter.routerName()) {
+            HomeScreen()
+        }
+
+        composable(ProductRouter.routerName()) {
                 ProductScreen()
         }
 
-        composable("recipe") {
+        composable(RecipeRouter.routerName()) {
             RecipeScreen()
         }
     }
