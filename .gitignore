@@ -40,3 +40,15 @@ bin/
 
 ### Mac OS ###
 .DS_Store
+hs_err_pid82395.log
+hs_err_pid85296.log
+.idea/migrations.xml
+.idea/other.xml
+.idea/uiDesigner.xml
+.idea/codeStyles/codeStyleConfig.xml
+.idea/codeStyles/Project.xml
+cafe-desktop-admin/.idea/misc.xml
+cafe-desktop-admin/.idea/vcs.xml
+cafe-desktop-admin/.idea/workspace.xml
+cafe-desktop-admin/.idea/codeStyles/codeStyleConfig.xml
+cafe-desktop-admin/.idea/codeStyles/Project.xml

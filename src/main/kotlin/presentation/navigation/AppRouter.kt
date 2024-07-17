@@ -1,7 +1,5 @@
 package presentation.navigation
 
-
-
 sealed interface AppRouter {
     fun routerName(): String
 

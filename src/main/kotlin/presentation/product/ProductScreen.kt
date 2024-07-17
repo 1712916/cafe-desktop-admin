@@ -3,25 +3,18 @@ package presentation.recipe
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.FloatingActionButton
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.mutableStateListOf
-import androidx.compose.runtime.remember
-import androidx.compose.ui.Modifier
+import androidx.compose.runtime.*
+import androidx.compose.ui.*
 import androidx.compose.ui.unit.dp
-import data.home.CategoryModel
-import data.home.ProductAndCategoryModel
-import data.home.ProductGroupByCategory
-import data.home.ProductModel
-import presentation.product.compose.ListingProductViewData
+import androidx.compose.ui.window.*
+import data.entity.CategoryEntity
+import data.entity.ProductAndCategoryEntity
+import data.entity.ProductGroupByCategory
+import data.entity.ProductEntity
+import presentation.product.*
 import presentation.product.compose.ProductCard
 import presentation.product.compose.ProductModelToProductView
 import presentation.product.compose.ProductViewData
@@ -44,15 +37,14 @@ import presentation.product.compose.ProductViewData
 fun ProductScreen() {
     val productList = remember { mutableStateListOf<ProductViewData>() }
 
-
     val productGroupByCategory = remember { mutableStateListOf<ProductGroupByCategory>() }
 
-
+    var showCreateFormView by remember { mutableStateOf <Boolean>(false)}
 
     LaunchedEffect(Unit) {
         // Grouping the products by categories
         val productAndCategoryList = listOf(
-            ProductAndCategoryModel(
+            ProductAndCategoryEntity(
                 productId = 1,
                 productName = "Product 1",
                 productDescription = "Description for Product 1",
@@ -60,42 +52,42 @@ fun ProductScreen() {
                 categoryId = 101,
                 categoryName = "Category 1"
             ),
-            ProductAndCategoryModel(
+            ProductAndCategoryEntity(
                 productId = 1,
                 productName = "Product 1",
                 productDescription = "Description for Product 1",
                 productImages = listOf("image1a.jpg", "image1b.jpg"),
                 categoryId = 101,
                 categoryName = "Category 1"
-            ), ProductAndCategoryModel(
+            ), ProductAndCategoryEntity(
                 productId = 1,
                 productName = "Product 1",
                 productDescription = "Description for Product 1",
                 productImages = listOf("image1a.jpg", "image1b.jpg"),
                 categoryId = 101,
                 categoryName = "Category 1"
-            ), ProductAndCategoryModel(
+            ), ProductAndCategoryEntity(
                 productId = 1,
                 productName = "Product 1",
                 productDescription = "Description for Product 1",
                 productImages = listOf("image1a.jpg", "image1b.jpg"),
                 categoryId = 101,
                 categoryName = "Category 1"
-            ), ProductAndCategoryModel(
+            ), ProductAndCategoryEntity(
                 productId = 1,
                 productName = "Product 1",
                 productDescription = "Description for Product 1",
                 productImages = listOf("image1a.jpg", "image1b.jpg"),
                 categoryId = 101,
                 categoryName = "Category 1"
-            ), ProductAndCategoryModel(
+            ), ProductAndCategoryEntity(
                 productId = 1,
                 productName = "Product 1",
                 productDescription = "Description for Product 1",
                 productImages = listOf("image1a.jpg", "image1b.jpg"),
                 categoryId = 101,
                 categoryName = "Category 1"
-            ), ProductAndCategoryModel(
+            ), ProductAndCategoryEntity(
                 productId = 1,
                 productName = "Product 1",
                 productDescription = "Description for Product 1",
@@ -217,9 +209,9 @@ fun ProductScreen() {
 
 // Creating the list of ProductGroupByCategory
         val productGroupByCategoryList = groupedByCategory.map { (categoryId, productAndCategoryList) ->
-            val category = CategoryModel(id = categoryId, name = productAndCategoryList.first().categoryName)
+            val category = CategoryEntity(id = categoryId, name = productAndCategoryList.first().categoryName)
             val productList = productAndCategoryList.map {
-                ProductModel(
+                ProductEntity(
                     id = it.productId,
                     name = it.productName,
                     description = it.productDescription,
@@ -232,16 +224,15 @@ fun ProductScreen() {
         productGroupByCategory.addAll(productGroupByCategoryList)
     }
 
-
-
     Scaffold(floatingActionButton = {
         FloatingActionButton(
             onClick = {
-                productList.add(
-                    ListingProductViewData(
-                        "Product name", "Product description", "Product image"
-                    )
-                )
+                showCreateFormView = true
+//                productList.add(
+//                    ListingProductViewData(
+//                        "Product name", "Product description", "Product image"
+//                    )
+//                )
             },
         ) {
             Text("add")
@@ -270,7 +261,15 @@ fun ProductScreen() {
 
     }
 
+    if (showCreateFormView)
+
+    Dialog(
+        onDismissRequest = {
+            showCreateFormView = false
+        },
+
+        ) {
+        CreateProductForm()
+    }
+
 }
-
-
-
